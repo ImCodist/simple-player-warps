@@ -10,7 +10,6 @@ import java.io.File;
 
 public final class SimplePlayerWarps extends JavaPlugin {
     public WarpDataHandler warpDataHandler;
-    private Config config;
 
     @Override
     public void onEnable() {
@@ -23,12 +22,16 @@ public final class SimplePlayerWarps extends JavaPlugin {
         getLogger().info("Loaded " + warpDataHandler.warps.size() + " warps");
 
         // Register commands
-        getCommand("warp").setExecutor(new TeleportWarp(warpDataHandler));
-        getCommand("warps").setExecutor(new ListWarps(warpDataHandler));
-        getCommand("warpset").setExecutor(new CreateWarp(warpDataHandler, this.getConfig()));
-        getCommand("warpdel").setExecutor(new RemoveWarp(warpDataHandler));
-        getCommand("warpinfo").setExecutor(new InfoWarp(warpDataHandler));
-        getCommand("warpreload").setExecutor(new ReloadData(this));
+        try {
+            getCommand("warp").setExecutor(new TeleportWarp(warpDataHandler));
+            getCommand("warps").setExecutor(new ListWarps(warpDataHandler));
+            getCommand("warpset").setExecutor(new CreateWarp(warpDataHandler, this.getConfig()));
+            getCommand("warpdel").setExecutor(new RemoveWarp(warpDataHandler));
+            getCommand("warpinfo").setExecutor(new InfoWarp(warpDataHandler));
+            getCommand("warpreload").setExecutor(new ReloadData(this));
+        } catch (NullPointerException e) {
+            getLogger().info(e.toString());
+        }
     }
 
     @Override
@@ -38,6 +41,6 @@ public final class SimplePlayerWarps extends JavaPlugin {
     }
 
     public void loadConfig() {
-        config = new Config(this);
+        Config config = new Config(this);
     }
 }

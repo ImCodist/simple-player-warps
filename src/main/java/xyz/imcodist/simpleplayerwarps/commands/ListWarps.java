@@ -5,20 +5,20 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
-import xyz.imcodist.simpleplayerwarps.data.WarpData;
+import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ListWarps implements TabExecutor {
-    private WarpDataHandler dataHandler;
+    private final WarpDataHandler dataHandler;
 
     public ListWarps(WarpDataHandler warpDataHandler) {
         dataHandler = warpDataHandler;
     }
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Get player if the sender input a player.
         // TODO: Add a way to get warps made by the console.
         Player player = null;
@@ -31,15 +31,15 @@ public class ListWarps implements TabExecutor {
             }
         }
 
-        String string = "";
+        StringBuilder string = new StringBuilder();
         ArrayList<String> warps = dataHandler.getWarps(player);
 
         // Display a list of warps.
         // TODO: Sort alphabetically.
         int i = 0;
         for (String warp : warps) {
-            string += "<hover:show_text:'<gray>Click to</gray> warp <gray>to</gray> " + warp + "<gray>.</gray>'><click:run_command:/warp " + warp + ">" + warp + "</click></hover>";
-            if (i < warps.size() - 1) string += "<gray>, </gray>";
+            string.append("<hover:show_text:'<gray>Click to</gray> warp <gray>to</gray> ").append(warp).append("<gray>.</gray>'><click:run_command:/warp ").append(warp).append(">").append(warp).append("</click></hover>");
+            if (i < warps.size() - 1) string.append("<gray>, </gray>");
 
             i++;
         }
@@ -50,8 +50,8 @@ public class ListWarps implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length <= 1) return null;
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

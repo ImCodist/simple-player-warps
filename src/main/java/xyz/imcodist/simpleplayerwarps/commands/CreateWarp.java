@@ -8,18 +8,18 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpData;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class CreateWarp implements TabExecutor {
-    private WarpDataHandler dataHandler;
-    private FileConfiguration config;
+    private final WarpDataHandler dataHandler;
+    private final FileConfiguration config;
 
     public CreateWarp(WarpDataHandler warpDataHandler, FileConfiguration fileConfig) {
         // Get variables from the plugin class.
@@ -28,7 +28,7 @@ public class CreateWarp implements TabExecutor {
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Create a new warp.
         WarpData warp = new WarpData();
 
@@ -58,9 +58,7 @@ public class CreateWarp implements TabExecutor {
                             Double.parseDouble(args[2]),
                             Double.parseDouble(args[3])
                     );
-                } catch (Exception e) {
-                    location = null;
-                }
+                } catch (Exception ignored) {}
             }
 
             // Check if location is valid.
@@ -144,7 +142,7 @@ public class CreateWarp implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return new ArrayList<String>();
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        return new ArrayList<>();
     }
 }

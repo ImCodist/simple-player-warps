@@ -31,7 +31,7 @@ public class WarpJsonData {
 
         warp.name = name;
 
-        Location newLocation = new Location(
+        warp.location = new Location(
                 Bukkit.getWorld(world),
                 location.get(0),
                 location.get(1),
@@ -39,7 +39,6 @@ public class WarpJsonData {
                 location.get(3).floatValue(),
                 location.get(4).floatValue()
         );
-        warp.location = newLocation;
 
         // TODO: Convert author input manually to UUID's if its a username.
         if (author != null) warp.author = UUID.fromString(author);

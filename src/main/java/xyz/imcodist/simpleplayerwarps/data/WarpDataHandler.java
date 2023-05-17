@@ -15,7 +15,7 @@ import java.util.ArrayList;
 public class WarpDataHandler {
     public ArrayList<WarpData> warps = new ArrayList<>();
     public File warpDataFolder;
-    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
+    private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public WarpDataHandler(File dataFolder) {
         warpDataFolder = dataFolder;
@@ -69,10 +69,8 @@ public class WarpDataHandler {
         if (sender instanceof Player) player = (Player) sender;
         else return true;
 
-        if (player != null) {
-            if (player.hasPermission("simpleplayerwarps.delwarp.others")) return true;
-            if (player.getUniqueId().equals(warp.author)) return true;
-        }
+        if (player.hasPermission("simpleplayerwarps.delwarp.others")) return true;
+        if (player.getUniqueId().equals(warp.author)) return true;
 
         return false;
     }
@@ -126,7 +124,6 @@ public class WarpDataHandler {
             writer.close();
         } catch (IOException e) {
             Bukkit.getLogger().info(e.toString());
-            return;
         }
     }
 

@@ -3,22 +3,20 @@ package xyz.imcodist.simpleplayerwarps.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.plugin.java.JavaPlugin;
+import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.SimplePlayerWarps;
-import xyz.imcodist.simpleplayerwarps.data.Config;
-import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReloadData implements TabExecutor {
-    private SimplePlayerWarps plugin;
+    private final SimplePlayerWarps plugin;
     public ReloadData(SimplePlayerWarps javaPlugin) {
         plugin = javaPlugin;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Reload warps.
         plugin.warpDataHandler.loadFiles();
 
@@ -31,7 +29,7 @@ public class ReloadData implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
-        return new ArrayList<String>();
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        return new ArrayList<>();
     }
 }
