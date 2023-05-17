@@ -41,6 +41,6 @@ public final class SimplePlayerWarps extends JavaPlugin {
     }
 
     public void loadConfig() {
-        Config config = new Config(this);
+        new Config(this);
     }
 }

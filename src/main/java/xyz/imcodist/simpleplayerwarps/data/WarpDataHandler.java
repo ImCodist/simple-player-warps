@@ -64,7 +64,7 @@ public class WarpDataHandler {
     }
 
     public boolean canEditWarp(CommandSender sender, WarpData warp) {
-        Player player = null;
+        Player player;
 
         if (sender instanceof Player) player = (Player) sender;
         else return true;
@@ -145,6 +145,7 @@ public class WarpDataHandler {
             WarpJsonData data = gson.fromJson(reader, WarpJsonData.class);
             reader.close();
 
+            file.delete();
             addWarp(data.toWarp());
         } catch (IOException e) {
             Bukkit.getLogger().info(e.toString());
