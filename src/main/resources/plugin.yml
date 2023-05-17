@@ -1,0 +1,55 @@
+name: SimplePlayerWarps
+version: '${project.version}'
+main: xyz.imcodist.simpleplayerwarps.SimplePlayerWarps
+api-version: 1.19
+authors: [codist]
+description: A plugin that lets players create "warps" themselves and others can teleport to.
+website: www.imcodist.xyz
+
+commands:
+  warp:
+    description: Goto warp
+    usage: /<command> <name>
+    permission: simpleplayerwarps.warp
+  warps:
+    description: List warps
+    usage: /<command> [player]
+    permission: simpleplayerwarps.warps
+  warpset:
+    description: Set warp
+    usage: /<command> <name>
+    aliases: [ setwarp ]
+    permission: simpleplayerwarps.warpset
+  warpdel:
+    description: Remove warp
+    usage: /<command> <name>
+    aliases: [ delwarp ]
+    permission: simpleplayerwarps.warpdel
+  warpinfo:
+    description: Info warp
+    usage: /<command> <name>
+    permission: simpleplayerwarps.warpinfo # warioinfo
+
+permissions:
+  simpleplayerwarps.warp:
+    description: Allows a user to teleport to a warp.
+    default: true
+  simpleplayerwarps.warps:
+    description: Allows a user to view every created warp.
+    default: true
+  simpleplayerwarps.warpset:
+    description: Allows a user to create a warp.
+    default: true
+  simpleplayerwarps.warpdel:
+    description: Allows a user to delete warps they own.
+    default: true
+  simpleplayerwarps.warpinfo:
+    description: Allows a user to view information on a warp.
+    default: true
+
+  simpleplayerwarps.warpset.infinite:
+    description: Allows a user to create infinite warps.
+    default: op
+  simpleplayerwarps.warpdel.others:
+    description: Allows a user to delete others warps.
+    default: op
