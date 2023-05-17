@@ -1,10 +1,12 @@
 package xyz.imcodist.simpleplayerwarps.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.entity.Player;
 import xyz.imcodist.simpleplayerwarps.data.WarpData;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
@@ -32,7 +34,7 @@ public class InfoWarp implements TabExecutor {
         sender.sendRichMessage("<gray>Warp </gray>" + warp.name + "<gray> info:</gray>");
         sender.sendRichMessage("<gray>- Position: </gray>" + String.format("%.2f<gray>,</gray> %.2f<gray>,</gray> %.2f", warp.location.getX(), warp.location.getY(), warp.location.getZ()));
         sender.sendRichMessage("<gray>- World: </gray>" + warp.location.getWorld().getName());
-        if (warp.author != null) sender.sendRichMessage("<gray>- Author: </gray>" + Bukkit.getPlayer(warp.author).getName());
+        if (warp.authorName != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.authorName);
 
         return true;
     }

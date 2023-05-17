@@ -8,4 +8,6 @@ public class WarpData {
     public String name;
     public Location location;
     public UUID author;
+
+    public String authorName;
 }

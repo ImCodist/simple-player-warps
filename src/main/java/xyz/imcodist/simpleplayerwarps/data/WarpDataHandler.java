@@ -24,6 +24,12 @@ public class WarpDataHandler {
     }
 
     public void addWarp(WarpData warp) {
+        // TODO: Do this but better
+        if (warp.author != null) {
+            Player player = Bukkit.getPlayer(warp.author);
+            if (player != null) warp.authorName = player.getName();
+        }
+
         warps.add(warp);
 
         WarpData[] add = {warp};
