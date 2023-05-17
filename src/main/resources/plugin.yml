@@ -4,7 +4,7 @@ main: xyz.imcodist.simpleplayerwarps.SimplePlayerWarps
 api-version: 1.19
 authors: [codist]
 description: A plugin that lets players create "warps" themselves and others can teleport to.
-website: www.imcodist.xyz
+website: www.github.com/ImCodist/simple-player-warps
 
 commands:
   warp:
