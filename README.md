@@ -1,4 +1,4 @@
-![Banner](https://github.com/ImCodist/simple-player-warps/assets/50346006/3d8d19aa-8b2b-4da5-bc78-a5f4b3153bb0)
+![Banner](https://github.com/ImCodist/simple-player-warps/assets/50346006/2eef8819-b3f5-47ce-8f2a-2702da081e62)
 
 # simple-player-warps
 README work in progress.
