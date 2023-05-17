@@ -29,6 +29,10 @@ commands:
     description: Info warp
     usage: /<command> <name>
     permission: simpleplayerwarps.warpinfo # warioinfo
+  warpreload:
+    description: Reload config and warps
+    usage: /<command>
+    permission: simpleplayerwarps.warpreload
 
 permissions:
   simpleplayerwarps.warp:
@@ -46,6 +50,9 @@ permissions:
   simpleplayerwarps.warpinfo:
     description: Allows a user to view information on a warp.
     default: true
+  simpleplayerwarps.warpreload:
+    description: Reloads the plugins configuration and warps folder.
+    default: op
 
   simpleplayerwarps.warpset.infinite:
     description: Allows a user to create infinite warps.

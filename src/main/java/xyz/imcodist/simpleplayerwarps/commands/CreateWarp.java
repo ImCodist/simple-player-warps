@@ -36,6 +36,7 @@ public class CreateWarp implements TabExecutor {
         if (args.length >= 1) warp.name = args[0];
 
         // Set the location based on the sender.
+        // TODO: Let the user input a player to set as.
         if (sender instanceof Player) {
             // Get information from the player.
             Player player = (Player) sender;

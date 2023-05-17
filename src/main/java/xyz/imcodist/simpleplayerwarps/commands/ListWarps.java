@@ -44,6 +44,7 @@ public class ListWarps implements TabExecutor {
             i++;
         }
 
+        // TODO: Add a "no warps found" message.
         sender.sendRichMessage("<gray>[</gray>" + string + "<gray>]</gray>");
         return true;
     }

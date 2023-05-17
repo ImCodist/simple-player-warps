@@ -77,7 +77,11 @@ public class WarpDataHandler {
         return false;
     }
 
-    private void loadFiles() {
+    public void loadFiles() {
+        // Make sure warps is empty.
+        warps.clear();
+
+        // Load each warp file.
         File[] files = warpDataFolder.listFiles();
         if (files == null) return;
 

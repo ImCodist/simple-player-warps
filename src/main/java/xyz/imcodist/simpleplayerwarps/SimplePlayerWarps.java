@@ -15,7 +15,7 @@ public final class SimplePlayerWarps extends JavaPlugin {
     @Override
     public void onEnable() {
         // Set up the config class.
-        config = new Config(this);
+        loadConfig();
         getLogger().info("Loaded configuration file");
 
         // Set up the warp data class.
@@ -28,11 +28,16 @@ public final class SimplePlayerWarps extends JavaPlugin {
         getCommand("warpset").setExecutor(new CreateWarp(warpDataHandler, this.getConfig()));
         getCommand("warpdel").setExecutor(new RemoveWarp(warpDataHandler));
         getCommand("warpinfo").setExecutor(new InfoWarp(warpDataHandler));
+        getCommand("warpreload").setExecutor(new ReloadData(this));
     }
 
     @Override
     public void onDisable() {
         // Disable logic.
         // Nothing here yet.
+    }
+
+    public void loadConfig() {
+        config = new Config(this);
     }
 }

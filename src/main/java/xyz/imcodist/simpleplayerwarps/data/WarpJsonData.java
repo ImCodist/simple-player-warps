@@ -41,6 +41,7 @@ public class WarpJsonData {
         );
         warp.location = newLocation;
 
+        // TODO: Convert author input manually to UUID's if its a username.
         if (author != null) warp.author = UUID.fromString(author);
 
         return warp;
