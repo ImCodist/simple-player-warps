@@ -29,6 +29,8 @@ public class CreateWarp implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
+        // TODO: Let users edit property's of a warp using a command.
+
         // Create a new warp.
         WarpData warp = new WarpData();
 

@@ -9,6 +9,7 @@ import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ListWarps implements TabExecutor {
@@ -32,10 +33,11 @@ public class ListWarps implements TabExecutor {
         }
 
         StringBuilder string = new StringBuilder();
+
         ArrayList<String> warps = dataHandler.getWarps(player);
+        Collections.sort(warps);
 
         // Display a list of warps.
-        // TODO: Sort alphabetically.
         int i = 0;
         for (String warp : warps) {
             string.append("<hover:show_text:'<gray>Click to</gray> warp <gray>to</gray> ").append(warp).append("<gray>.</gray>'><click:run_command:/warp ").append(warp).append(">").append(warp).append("</click></hover>");
@@ -44,8 +46,9 @@ public class ListWarps implements TabExecutor {
             i++;
         }
 
-        // TODO: Add a "no warps found" message.
-        sender.sendRichMessage("<gray>[</gray>" + string + "<gray>]</gray>");
+        if (i > 0) sender.sendRichMessage("<gray>[</gray>" + string + "<gray>]</gray>");
+        else sender.sendRichMessage("<gray>No</gray> warps <gray>found.</gray>");
+
         return true;
     }
 
