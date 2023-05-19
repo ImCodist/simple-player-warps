@@ -1,8 +1,6 @@
 package xyz.imcodist.simpleplayerwarps;
 
-import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import xyz.imcodist.simpleplayerwarps.commands.*;
@@ -31,6 +29,7 @@ public final class SimplePlayerWarps extends JavaPlugin implements Listener {
             getCommand("warps").setExecutor(new ListWarps(warpDataHandler));
             getCommand("warpset").setExecutor(new CreateWarp(warpDataHandler, this.getConfig()));
             getCommand("warpdel").setExecutor(new RemoveWarp(warpDataHandler));
+            getCommand("warpedit").setExecutor(new EditWarp(warpDataHandler));
             getCommand("warpinfo").setExecutor(new InfoWarp(warpDataHandler));
             getCommand("warpreload").setExecutor(new ReloadData(this));
         } catch (NullPointerException e) {

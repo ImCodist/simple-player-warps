@@ -1,12 +1,9 @@
 package xyz.imcodist.simpleplayerwarps.commands;
 
-import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpData;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
@@ -14,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class InfoWarp implements TabExecutor {
-    private WarpDataHandler dataHandler;
+    private final WarpDataHandler dataHandler;
     public InfoWarp(WarpDataHandler warpDataHandler) {
         dataHandler = warpDataHandler;
     }
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         WarpData warp = null;
         if (args.length >= 1) warp = dataHandler.getWarp(args[0]);
 
@@ -40,11 +37,11 @@ public class InfoWarp implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1) {
             return dataHandler.getWarps();
         }
 
-        return new ArrayList<String>();
+        return new ArrayList<>();
     }
 }

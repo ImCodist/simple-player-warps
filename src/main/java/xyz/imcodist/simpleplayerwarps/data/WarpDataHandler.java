@@ -11,6 +11,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public class WarpDataHandler {
     public ArrayList<WarpData> warps = new ArrayList<>();
@@ -72,7 +73,7 @@ public class WarpDataHandler {
 
         for (WarpData warp : warps) {
             String value2 = warp.authorName;
-            if (!username && string != null) value2 = warp.author.toString();
+            if (!username && string != null && warp.author != null) value2 = warp.author.toString();
 
             if (string == null || string.equals(value2)) {
                 playerWarps.add(warp.name);
@@ -94,16 +95,26 @@ public class WarpDataHandler {
         return players;
     }
 
-    public boolean canEditWarp(CommandSender sender, WarpData warp) {
+    public boolean canEditWarp(CommandSender sender, WarpData warp, String permission) {
         Player player;
 
         if (sender instanceof Player) player = (Player) sender;
         else return true;
 
-        if (player.hasPermission("simpleplayerwarps.delwarp.others")) return true;
+        if (player.hasPermission(permission)) return true;
         if (player.getUniqueId().equals(warp.author)) return true;
 
         return false;
+    }
+
+    public List<String> getEditableWarps(CommandSender sender, String otherPermission) {
+        Player player = null;
+        if (sender instanceof Player) {
+            player = (Player) sender;
+            if (player.hasPermission(otherPermission)) player = null;
+        }
+
+        return getWarps(player);
     }
 
     public void loadFiles() {

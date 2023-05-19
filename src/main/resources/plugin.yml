@@ -25,6 +25,11 @@ commands:
     usage: /<command> <name>
     aliases: [ delwarp ]
     permission: simpleplayerwarps.warpdel
+  warpedit:
+    description: Edit warp
+    usage: /<command> <name>
+    aliases: [ editwarp ]
+    permission: simpleplayerwarps.warpedit
   warpinfo:
     description: Info warp
     usage: /<command> <name>
@@ -47,6 +52,9 @@ permissions:
   simpleplayerwarps.warpdel:
     description: Allows a user to delete warps they own.
     default: true
+  simpleplayerwarps.warpedit:
+    description: Allows a user to edit warps they own.
+    default: true
   simpleplayerwarps.warpinfo:
     description: Allows a user to view information on a warp.
     default: true
@@ -59,4 +67,10 @@ permissions:
     default: op
   simpleplayerwarps.warpdel.others:
     description: Allows a user to delete others warps.
+    default: op
+  simpleplayerwarps.warpedit.others:
+    description: Allows a user to edit others warps.
+    default: op
+  simpleplayerwarps.warpedit.advanced:
+    description: Allows a user to edit advanced values of a warp like position and author.
     default: op

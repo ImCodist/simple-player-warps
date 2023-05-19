@@ -14,8 +14,6 @@ import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class CreateWarp implements TabExecutor {
     private final WarpDataHandler dataHandler;
@@ -91,14 +89,9 @@ public class CreateWarp implements TabExecutor {
             return true;
         } else {
             // Check warp name against regex.
-            String nameRegex = "[A-Za-z0-9_-]*";
-
-            Pattern pattern = Pattern.compile(nameRegex);
-            Matcher matcher = pattern.matcher(warp.name);
-
-            if (!matcher.matches()) {
+            if (!warp.isValidName(warp.name)) {
                 // The warp name uses an invalid character.
-                sender.sendRichMessage("Warp name <gray>uses invalid character(s).</gray>" + " <gray>[" + matcher.replaceAll("") + "]</gray>");
+                sender.sendRichMessage("Warp name <gray>uses invalid character(s).</gray>");
                 return true;
             }
         }
@@ -108,7 +101,7 @@ public class CreateWarp implements TabExecutor {
         boolean replaced = false;
         WarpData oldWarp = dataHandler.getWarp(warp.name);
         if (oldWarp != null) {
-            if (dataHandler.canEditWarp(sender, oldWarp)) {
+            if (dataHandler.canEditWarp(sender, oldWarp, "simpleplayerwarps.warpdel.others")) {
                 dataHandler.removeWarp(oldWarp);
                 replaced = true;
             } else {

@@ -3,7 +3,7 @@ package xyz.imcodist.simpleplayerwarps.commands;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
+import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpData;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RemoveWarp implements TabExecutor {
-    private WarpDataHandler dataHandler;
+    private final WarpDataHandler dataHandler;
 
     public RemoveWarp(WarpDataHandler warpDataHandler) {
         dataHandler = warpDataHandler;
     }
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String label, String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Check if a warp name has been entered.
         if (args.length < 1) {
             sender.sendRichMessage("<gray>No</gray> warp name <gray>has been entered.</gray>");
@@ -32,7 +32,7 @@ public class RemoveWarp implements TabExecutor {
         }
 
         // Check if the sender is able to edit the warp.
-        if (!dataHandler.canEditWarp(sender, warp)) {
+        if (!dataHandler.canEditWarp(sender, warp, "simpleplayerwarps.warpdel.others")) {
             sender.sendRichMessage("<gray>You</gray> cannot <gray>delete a warp you do not own.</gray>");
             return true;
         }
@@ -45,18 +45,9 @@ public class RemoveWarp implements TabExecutor {
     }
 
     @Override
-    public List<String> onTabComplete(CommandSender sender, Command command, String label, String[] args) {
+    public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Only show warps sender can edit.
-        Player player = null;
-        if (sender instanceof Player) {
-            player = (Player) sender;
-            if (player.hasPermission("simpleplayerwarps.delwarp.others")) player = null;
-        }
-
-        if (args.length == 1) {
-            return dataHandler.getWarps(player);
-        }
-
-        return new ArrayList<String>();
+        if (args.length == 1) return dataHandler.getEditableWarps(sender, "simpleplayerwarps.warpdel.others");
+        return new ArrayList<>();
     }
 }
