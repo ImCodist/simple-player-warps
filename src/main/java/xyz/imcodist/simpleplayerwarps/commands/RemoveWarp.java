@@ -27,13 +27,13 @@ public class RemoveWarp implements TabExecutor {
         // Get the warp and return if it doesn't exist.
         WarpData warp = dataHandler.getWarp(args[0]);
         if (warp == null) {
-            sender.sendRichMessage("<gray>No</gray> warp <gray>with that name exists.</gray>");
+            sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
         }
 
         // Check if the sender is able to edit the warp.
         if (!dataHandler.canEditWarp(sender, warp, "simpleplayerwarps.warpdel.others")) {
-            sender.sendRichMessage("<gray>You</gray> cannot <gray>delete a warp you do not own.</gray>");
+            sender.sendRichMessage("<gray>You</gray> don't have permission <gray>to edit warps you don't own.</gray>");
             return true;
         }
 

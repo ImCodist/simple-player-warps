@@ -24,7 +24,7 @@ public class TeleportWarp implements TabExecutor {
 
         // Make sure the warp exists.
         if (warp == null) {
-            sender.sendRichMessage("Warp <gray>does not exist.</gray>");
+            sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
         }
 
