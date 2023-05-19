@@ -50,7 +50,7 @@ public class ListWarps implements TabExecutor {
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        if (args.length <= 1) return null;
+        if (args.length <= 1) return dataHandler.getPlayers();
         return new ArrayList<>();
     }
 }

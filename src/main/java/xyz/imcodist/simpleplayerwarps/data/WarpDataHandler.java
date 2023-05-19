@@ -79,6 +79,18 @@ public class WarpDataHandler {
         return playerWarps;
     }
 
+    public ArrayList<String> getPlayers() {
+        ArrayList<String> players = new ArrayList<>();
+
+        for (WarpData warp : warps) {
+            if (warp.authorName != null) {
+                players.add(warp.authorName);
+            }
+        }
+
+        return players;
+    }
+
     public boolean canEditWarp(CommandSender sender, WarpData warp) {
         Player player;
 
