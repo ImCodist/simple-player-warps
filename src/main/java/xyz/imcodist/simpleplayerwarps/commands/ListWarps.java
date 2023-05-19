@@ -27,7 +27,9 @@ public class ListWarps implements TabExecutor {
 
         ArrayList<String> warps = dataHandler.getWarps(name);
         if (warps.isEmpty()) {
-            sender.sendRichMessage("<gray>Could not find</gray> player<gray> named</gray> " + args[0] + "<gray>.</gray>");
+            if (name != null) sender.sendRichMessage("Player<gray> named</gray> " + args[0] + "<gray> has no warps set.</gray>");
+            else sender.sendRichMessage("<gray>No</gray> warps <gray>have been set.</gray>");
+
             return true;
         }
 

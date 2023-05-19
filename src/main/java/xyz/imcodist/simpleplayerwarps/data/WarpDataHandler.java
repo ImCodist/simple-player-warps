@@ -57,7 +57,10 @@ public class WarpDataHandler {
     }
 
     public ArrayList<String> getWarps(Player player) {
-        return getWarps(player.getUniqueId().toString(), false);
+        String uuid = null;
+        if (player != null) uuid = player.getUniqueId().toString();
+
+        return getWarps(uuid, false);
     }
 
     public ArrayList<String> getWarps(String playerName) {
