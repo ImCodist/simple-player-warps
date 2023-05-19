@@ -1,20 +1,24 @@
 package xyz.imcodist.simpleplayerwarps;
 
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
+import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import xyz.imcodist.simpleplayerwarps.commands.*;
 import xyz.imcodist.simpleplayerwarps.data.Config;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
+import xyz.imcodist.simpleplayerwarps.events.PlayerJoin;
 
 import java.io.File;
 
-public final class SimplePlayerWarps extends JavaPlugin {
+public final class SimplePlayerWarps extends JavaPlugin implements Listener {
     public WarpDataHandler warpDataHandler;
 
     @Override
     public void onEnable() {
         // Set up the config class.
-        loadConfig();
+        new Config(this);
         getLogger().info("Loaded configuration file");
 
         // Set up the warp data class.
@@ -32,15 +36,14 @@ public final class SimplePlayerWarps extends JavaPlugin {
         } catch (NullPointerException e) {
             getLogger().info(e.toString());
         }
+
+        // Register events
+        getServer().getPluginManager().registerEvents(new PlayerJoin(warpDataHandler), this);
     }
 
     @Override
     public void onDisable() {
         // Disable logic.
         // Nothing here yet.
-    }
-
-    public void loadConfig() {
-        new Config(this);
     }
 }
