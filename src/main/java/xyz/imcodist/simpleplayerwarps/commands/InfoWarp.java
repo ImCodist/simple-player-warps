@@ -31,7 +31,9 @@ public class InfoWarp implements TabExecutor {
         sender.sendRichMessage("Information <gray>on warp</gray> " + warp.name + "<gray>:</gray>");
         sender.sendRichMessage("<gray>- Position: </gray>" + String.format("%.2f<gray>,</gray> %.2f<gray>,</gray> %.2f", warp.location.getX(), warp.location.getY(), warp.location.getZ()));
         sender.sendRichMessage("<gray>- World: </gray>" + warp.location.getWorld().getName());
+
         if (warp.authorName != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.authorName);
+        else if (warp.author != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.author);
 
         return true;
     }
