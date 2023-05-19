@@ -21,8 +21,10 @@ public class PlayerJoin implements Listener {
         Player player = event.getPlayer();
         UUID uuid = player.getUniqueId();
 
+        // Check for warps with the same UUID as the player who's joined.
         for (WarpData warp : dataHandler.warps) {
-            if (warp.author.equals(uuid)) {
+            if (warp.author != null && warp.author.equals(uuid)) {
+                // Update the warps author name and save the warp to a file.
                 warp.authorName = player.getName();
 
                 WarpData[] add = {warp};

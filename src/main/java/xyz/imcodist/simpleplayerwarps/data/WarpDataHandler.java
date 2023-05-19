@@ -53,14 +53,25 @@ public class WarpDataHandler {
     }
 
     public ArrayList<String> getWarps() {
-        return getWarps(null);
+        return getWarps(null, false);
     }
 
     public ArrayList<String> getWarps(Player player) {
+        return getWarps(player.getUniqueId().toString(), false);
+    }
+
+    public ArrayList<String> getWarps(String playerName) {
+        return getWarps(playerName, true);
+    }
+
+    public ArrayList<String> getWarps(String string, boolean username) {
         ArrayList<String> playerWarps = new ArrayList<>();
 
         for (WarpData warp : warps) {
-            if (player == null || player.getUniqueId().equals(warp.author)) {
+            String value2 = warp.authorName;
+            if (!username && string != null) value2 = warp.author.toString();
+
+            if (string == null || string.equals(value2)) {
                 playerWarps.add(warp.name);
             }
         }

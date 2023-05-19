@@ -1,10 +1,8 @@
 package xyz.imcodist.simpleplayerwarps.commands;
 
-import org.bukkit.Bukkit;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
-import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
@@ -22,19 +20,17 @@ public class ListWarps implements TabExecutor {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         // Get player if the sender input a player.
         // TODO: Add a way to get warps made by the console.
-        Player player = null;
-        if (args.length >= 1) {
-            player = Bukkit.getPlayer(args[0]);
-
-            if (player == null) {
-                sender.sendRichMessage("<gray>Could not find</gray> player<gray> named</gray> " + args[0] + "<gray>.</gray>");
-                return true;
-            }
-        }
-
         StringBuilder string = new StringBuilder();
 
-        ArrayList<String> warps = dataHandler.getWarps(player);
+        String name = null;
+        if (args.length >= 1) name = args[0];
+
+        ArrayList<String> warps = dataHandler.getWarps(name);
+        if (warps.isEmpty()) {
+            sender.sendRichMessage("<gray>Could not find</gray> player<gray> named</gray> " + args[0] + "<gray>.</gray>");
+            return true;
+        }
+
         Collections.sort(warps);
 
         // Display a list of warps.
