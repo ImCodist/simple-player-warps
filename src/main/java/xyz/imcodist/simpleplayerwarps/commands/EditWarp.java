@@ -39,13 +39,13 @@ public class EditWarp implements TabExecutor {
         // Get the warp and return if it doesn't exist.
         WarpData warp = dataHandler.getWarp(args[0]);
         if (warp == null) {
-            sender.sendRichMessage("<gray>No</gray> warp <gray>with that name exists.</gray>");
+            sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
         }
 
         // Check if the sender is able to edit the warp.
         if (!dataHandler.canEditWarp(sender, warp, "simpleplayerwarps.warpedit.others")) {
-            sender.sendRichMessage("<gray>You</gray> cannot <gray>edit a warp you do not own.</gray>");
+            sender.sendRichMessage("<gray>You</gray> don't have permission <gray>to edit warps you don't own.</gray>");
             return true;
         }
 
@@ -92,14 +92,14 @@ public class EditWarp implements TabExecutor {
                             warp.author = UUID.fromString(values.get(0));
                             warp.authorName = null;
                         } catch (Exception ignored) {
-                            couldNotSetMessage = "Author is not valid";
+                            couldNotSetMessage = "Author is not valid, trying using the players UUID";
                         }
                     }
             }
 
             if (couldNotSetMessage == null) {
                 String valueDisplay = getPropertyDisplayValue(warp, property);
-                sender.sendRichMessage("<gray>Set</gray> " + property + "<gray> to </gray>" + valueDisplay + "<gray>.</gray>");
+                sender.sendRichMessage("<gray>Set</gray> " + property + " <gray>of</gray> " + oldWarp.name + " <gray>to</gray> " + valueDisplay + "<gray>.</gray>");
 
                 WarpData[] remove = {oldWarp};
                 dataHandler.updateFiles(null, remove);
@@ -108,19 +108,27 @@ public class EditWarp implements TabExecutor {
                 dataHandler.updateFiles(add, null);
             }
             else {
-                sender.sendRichMessage("<gray>Could not set property</gray> " + property + "<gray>. (" + couldNotSetMessage + ")</gray>");
+                if (getPropertyList(sender).contains(property)) {
+                    sender.sendRichMessage("<gray>Could not set property</gray> " + property + " <gray>to</gray> " + values + "<gray>. (" + couldNotSetMessage + ")</gray>");
+                } else {
+                    sender.sendRichMessage("<gray>Property</gray> " + property + " <gray>does not exist.</gray>");
+                }
             }
         } else if (args.length == 2) {
             // Property given
             String property = args[1];
             String valueDisplay = getPropertyDisplayValue(warp, property);
 
-            sender.sendRichMessage("<gray>Property</gray> " + property + "<gray> is </gray>" + valueDisplay + "<gray>.</gray>");
+            if (getPropertyList(sender).contains(property)) {
+                sender.sendRichMessage("<gray>Property</gray> " + property + " <gray>of</gray> " + warp.name + " <gray>is</gray> " + valueDisplay + "<gray>.</gray>");
+            } else {
+                sender.sendRichMessage("<gray>Property</gray> " + property + " <gray>does not exist.</gray>");
+            }
         } else {
             // Only warp given
             ArrayList<String> propertyList = getPropertyList(sender);
             if (propertyList.size() > 0) {
-                sender.sendRichMessage("<gray>Editable propertys of warp</gray> " + warp.name + "<gray>:</gray>");
+                sender.sendRichMessage("Editable propertys <gray>of warp</gray> " + warp.name + "<gray>:</gray>");
 
                 for (String property : propertyList) {
                     String valueDisplay = getPropertyDisplayValue(warp, property);
@@ -129,10 +137,10 @@ public class EditWarp implements TabExecutor {
                     String suffix = "";
                     if (propertys.get(property)) suffix = " ★";
 
-                    sender.sendRichMessage(String.format("<hover:show_text:'%s'><click:suggest_command:%s><gray>- %s%s:</gray> %s</click></hover>", commandInsert, commandInsert, property, suffix, valueDisplay));
+                    sender.sendRichMessage(String.format("<hover:show_text:'%s'><click:suggest_command:%s ><gray>- %s%s:</gray> %s</click></hover>", commandInsert, commandInsert, property, suffix, valueDisplay));
                 }
             } else {
-                sender.sendRichMessage("<gray>There are no editable propertys of warp</gray> " + warp.name + "<gray>.</gray>");
+                sender.sendRichMessage("<gray>There are</gray> no editable propertys <gray>of warp</gray> " + warp.name + "<gray>.</gray>");
             }
         }
 
