@@ -23,12 +23,12 @@ public class InfoWarp implements TabExecutor {
 
         // If warp does not exist.
         if (warp == null) {
-            sender.sendRichMessage("Warp <gray>does not exist.</gray>");
+            sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
         }
 
         // About text.
-        sender.sendRichMessage("<gray>Warp </gray>" + warp.name + "<gray> info:</gray>");
+        sender.sendRichMessage("Information <gray>on warp</gray> " + warp.name + "<gray>:</gray>");
         sender.sendRichMessage("<gray>- Position: </gray>" + String.format("%.2f<gray>,</gray> %.2f<gray>,</gray> %.2f", warp.location.getX(), warp.location.getY(), warp.location.getZ()));
         sender.sendRichMessage("<gray>- World: </gray>" + warp.location.getWorld().getName());
         if (warp.authorName != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.authorName);
