@@ -2,6 +2,7 @@ package xyz.imcodist.simpleplayerwarps.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
@@ -23,6 +24,7 @@ public class EditWarp implements TabExecutor {
         // TODO: Let users configure if an option is considered advanced or not.
         propertys.put("name", false);
         propertys.put("location", true);
+        propertys.put("world", true);
         propertys.put("author", true);
     }
 
@@ -95,6 +97,13 @@ public class EditWarp implements TabExecutor {
                             couldNotSetMessage = "Author is not valid, trying using the players UUID";
                         }
                     }
+                    break;
+                case ("world"):
+                    World world = Bukkit.getWorld(values.get(0));
+
+                    if (world != null) warp.location.setWorld(world);
+                    else couldNotSetMessage = "World does not exist";
+                    break;
             }
 
             if (couldNotSetMessage == null) {
@@ -159,6 +168,8 @@ public class EditWarp implements TabExecutor {
                 if (player != null) valueDisplay = player.getName();
                 else if (warp.authorName != null) valueDisplay = warp.authorName;
                 else if (warp.author != null) valueDisplay = warp.author.toString();
+                break;
+            case ("world"): valueDisplay = warp.location.getWorld().getName(); break;
         }
 
         return valueDisplay;
