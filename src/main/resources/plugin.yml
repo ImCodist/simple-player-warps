@@ -8,34 +8,34 @@ website: www.github.com/ImCodist/simple-player-warps
 
 commands:
   warp:
-    description: Goto warp
+    description: Teleport to a created warp.
     usage: /<command> <name>
     permission: simpleplayerwarps.warp
   warps:
-    description: List warps
+    description: Returns each warp in a list.
     usage: /<command> [player]
     permission: simpleplayerwarps.warps
   warpset:
-    description: Set warp
+    description: Create a new warp.
     usage: /<command> <name>
     aliases: [ setwarp ]
     permission: simpleplayerwarps.warpset
   warpdel:
-    description: Remove warp
+    description: Remove an existing warp.
     usage: /<command> <name>
     aliases: [ delwarp ]
     permission: simpleplayerwarps.warpdel
   warpedit:
-    description: Edit warp
+    description: Edit values of an existing warp.
     usage: /<command> <name>
     aliases: [ editwarp ]
     permission: simpleplayerwarps.warpedit
   warpinfo:
-    description: Info warp
+    description: Returns information on a warp.
     usage: /<command> <name>
     permission: simpleplayerwarps.warpinfo # warioinfo
   warpreload:
-    description: Reload config and warps
+    description: Reload config and warp files.
     usage: /<command>
     permission: simpleplayerwarps.warpreload
 
