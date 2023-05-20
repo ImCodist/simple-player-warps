@@ -12,6 +12,7 @@ public class WarpJsonData {
     public ArrayList<Double> location = new ArrayList<>();
     public String author;
     public String authorName;
+    public boolean isPrivate;
 
     public WarpJsonData(WarpData warp) {
         name = warp.name;
@@ -23,6 +24,8 @@ public class WarpJsonData {
         location.add(warp.location.getZ());
         location.add((double) warp.location.getYaw());
         location.add((double) warp.location.getPitch());
+
+        isPrivate = warp.isPrivate;
 
         if (warp.author != null) author = warp.author.toString();
         if (warp.authorName != null) authorName = warp.authorName;
@@ -41,6 +44,8 @@ public class WarpJsonData {
                 location.get(3).floatValue(),
                 location.get(4).floatValue()
         );
+
+        warp.isPrivate = isPrivate;
 
         // TODO: Convert author input manually to UUID's if its a username.
         if (author != null) warp.author = UUID.fromString(author);

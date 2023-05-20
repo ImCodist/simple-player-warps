@@ -74,3 +74,10 @@ permissions:
   simpleplayerwarps.warpedit.advanced:
     description: Allows a user to edit advanced values of a warp like position and author.
     default: op
+  simpleplayerwarps.warps.private:
+    description: Allows a user to view private warps.
+    default: op
+
+  simpleplayerwarps.privatewarps:
+    description: Allows a user to create private warps.
+    default: true

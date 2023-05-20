@@ -99,7 +99,7 @@ public class CreateWarp implements TabExecutor {
 
         // If a warp with the same name exists attempt to remove it.
         boolean replaced = false;
-        WarpData oldWarp = dataHandler.getWarp(warp.name);
+        WarpData oldWarp = dataHandler.getWarp(warp.name, null);
         if (oldWarp != null) {
             if (dataHandler.canEditWarp(sender, oldWarp, "simpleplayerwarps.warpdel.others")) {
                 dataHandler.removeWarp(oldWarp);
@@ -115,7 +115,7 @@ public class CreateWarp implements TabExecutor {
         if (maxPlayerWarps >= 0 && !replaced) {
             if (sender instanceof Player) {
                 Player player = (Player) sender;
-                ArrayList<String> playerWarps = dataHandler.getWarps(player);
+                ArrayList<String> playerWarps = dataHandler.getWarps(player, sender);
 
                 if (playerWarps.size() >= maxPlayerWarps && !player.hasPermission("simpleplayerwarps.setwarp.infinite")) {
                     sender.sendRichMessage("Maximum <gray>amount of</gray> warps <gray>reached.</gray>" + " <gray>(" + playerWarps.size() + " / " + maxPlayerWarps + ")</gray>");

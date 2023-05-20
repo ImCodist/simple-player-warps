@@ -13,6 +13,8 @@ public class WarpData {
 
     public String authorName;
 
+    public boolean isPrivate = false;
+
     public boolean isValidName(String givenName) {
         String nameRegex = "[A-Za-z0-9_-]*";
 

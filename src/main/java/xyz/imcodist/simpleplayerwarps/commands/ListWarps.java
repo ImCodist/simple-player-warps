@@ -4,6 +4,7 @@ import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabExecutor;
 import org.jetbrains.annotations.NotNull;
+import xyz.imcodist.simpleplayerwarps.data.WarpData;
 import xyz.imcodist.simpleplayerwarps.data.WarpDataHandler;
 
 import java.util.ArrayList;
@@ -25,7 +26,7 @@ public class ListWarps implements TabExecutor {
         String name = null;
         if (args.length >= 1) name = args[0];
 
-        ArrayList<String> warps = dataHandler.getWarps(name);
+        ArrayList<String> warps = dataHandler.getWarps(name, sender);
         if (warps.isEmpty()) {
             if (name != null) sender.sendRichMessage("Player<gray> named</gray> " + args[0] + "<gray> has no warps set.</gray>");
             else sender.sendRichMessage("<gray>No</gray> warps <gray>have been set.</gray>");
@@ -38,7 +39,13 @@ public class ListWarps implements TabExecutor {
         // Display a list of warps.
         int i = 0;
         for (String warp : warps) {
-            string.append("<hover:show_text:'<gray>Click to</gray> warp <gray>to</gray> ").append(warp).append("<gray>.</gray>'><click:run_command:/warp ").append(warp).append(">").append(warp).append("</click></hover>");
+            WarpData warpData = dataHandler.getWarp(warp, sender);
+
+            String color = "white";
+            if (warpData.isPrivate) color = "gray";
+
+            // TODO: THIS
+            string.append("<hover:show_text:'<gray>Click to</gray> warp <gray>to</gray> ").append(warp).append("<gray>.</gray>'><click:run_command:/warp ").append(warp).append(">").append("<").append(color).append(">").append(warp).append("</").append(color).append(">").append("</click></hover>");
             if (i < warps.size() - 1) string.append("<gray>, </gray>");
 
             i++;

@@ -25,7 +25,7 @@ public class RemoveWarp implements TabExecutor {
         }
 
         // Get the warp and return if it doesn't exist.
-        WarpData warp = dataHandler.getWarp(args[0]);
+        WarpData warp = dataHandler.getWarp(args[0], sender);
         if (warp == null) {
             sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;

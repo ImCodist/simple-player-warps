@@ -43,9 +43,16 @@ public class WarpDataHandler {
         updateFiles(null, remove);
     }
 
-    public WarpData getWarp(String name) {
+    public WarpData getWarp(String name, CommandSender sender) {
         for (WarpData warp : warps) {
             if (warp.name.equals(name)) {
+                if (warp.isPrivate && sender instanceof Player) {
+                    Player player = (Player) sender;
+                    if (!player.hasPermission("simpleplayerwarps.warps.private") && !player.getUniqueId().equals(warp.author)) {
+                        return null;
+                    }
+                }
+
                 return warp;
             }
         }
@@ -53,25 +60,27 @@ public class WarpDataHandler {
         return null;
     }
 
-    public ArrayList<String> getWarps() {
-        return getWarps(null, false);
+    public ArrayList<String> getWarps(CommandSender sender) {
+        return getWarps(null, false, sender);
     }
 
-    public ArrayList<String> getWarps(Player player) {
+    public ArrayList<String> getWarps(Player player, CommandSender sender) {
         String uuid = null;
         if (player != null) uuid = player.getUniqueId().toString();
 
-        return getWarps(uuid, false);
+        return getWarps(uuid, false, sender);
     }
 
-    public ArrayList<String> getWarps(String playerName) {
-        return getWarps(playerName, true);
+    public ArrayList<String> getWarps(String playerName, CommandSender sender) {
+        return getWarps(playerName, true, sender);
     }
 
-    public ArrayList<String> getWarps(String string, boolean username) {
+    public ArrayList<String> getWarps(String string, boolean username, CommandSender sender) {
         ArrayList<String> playerWarps = new ArrayList<>();
 
         for (WarpData warp : warps) {
+            if (getWarp(warp.name, sender) == null) continue;
+
             String value2 = warp.authorName;
             if (!username && string != null && warp.author != null) value2 = warp.author.toString();
 
@@ -114,7 +123,7 @@ public class WarpDataHandler {
             if (player.hasPermission(otherPermission)) player = null;
         }
 
-        return getWarps(player);
+        return getWarps(player, sender);
     }
 
     public void loadFiles() {

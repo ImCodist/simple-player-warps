@@ -26,6 +26,7 @@ public class EditWarp implements TabExecutor {
         propertys.put("location", true);
         propertys.put("world", true);
         propertys.put("author", true);
+        propertys.put("private", false);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class EditWarp implements TabExecutor {
         }
 
         // Get the warp and return if it doesn't exist.
-        WarpData warp = dataHandler.getWarp(args[0]);
+        WarpData warp = dataHandler.getWarp(args[0], sender);
         if (warp == null) {
             sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
@@ -84,11 +85,11 @@ public class EditWarp implements TabExecutor {
                     else couldNotSetMessage = "Missing full position (x y z)";
                     break;
                 case ("author"):
-                    Player player = Bukkit.getPlayer(values.get(0));
+                    Player authorPlayer = Bukkit.getPlayer(values.get(0));
 
-                    if (player != null) {
-                        warp.author = player.getUniqueId();
-                        warp.authorName = player.getName();
+                    if (authorPlayer != null) {
+                        warp.author = authorPlayer.getUniqueId();
+                        warp.authorName = authorPlayer.getName();
                     } else {
                         try {
                             warp.author = UUID.fromString(values.get(0));
@@ -104,6 +105,18 @@ public class EditWarp implements TabExecutor {
                     if (world != null) warp.location.setWorld(world);
                     else couldNotSetMessage = "World does not exist";
                     break;
+                case ("private"):
+                    boolean newValue = Boolean.parseBoolean(values.get(0));
+                    if (newValue && sender instanceof Player) {
+                        Player privatePlayer = (Player) sender;
+
+                        if (!privatePlayer.hasPermission("simpleplayerwarps.privatewarps")) {
+                            couldNotSetMessage = "You don't have permission to create private warps";
+                        }
+                    }
+
+                    if (couldNotSetMessage == null) warp.isPrivate = newValue;
+                    break;
             }
 
             if (couldNotSetMessage == null) {
@@ -118,7 +131,10 @@ public class EditWarp implements TabExecutor {
             }
             else {
                 if (getPropertyList(sender).contains(property)) {
-                    sender.sendRichMessage("<gray>Could not set property</gray> " + property + " <gray>to</gray> " + values + "<gray>. (" + couldNotSetMessage + ")</gray>");
+                    String valueDisplay = values.toString();
+                    if (values.size() <= 1) valueDisplay = values.get(0);
+
+                    sender.sendRichMessage("<gray>Could not set property</gray> " + property + " <gray>to</gray> " + valueDisplay + "<gray>. (" + couldNotSetMessage + ")</gray>");
                 } else {
                     sender.sendRichMessage("<gray>Property</gray> " + property + " <gray>does not exist.</gray>");
                 }
@@ -170,6 +186,7 @@ public class EditWarp implements TabExecutor {
                 else if (warp.author != null) valueDisplay = warp.author.toString();
                 break;
             case ("world"): valueDisplay = warp.location.getWorld().getName(); break;
+            case ("private"): valueDisplay = String.valueOf(warp.isPrivate); break;
         }
 
         return valueDisplay;

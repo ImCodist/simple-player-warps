@@ -19,7 +19,7 @@ public class InfoWarp implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         WarpData warp = null;
-        if (args.length >= 1) warp = dataHandler.getWarp(args[0]);
+        if (args.length >= 1) warp = dataHandler.getWarp(args[0], sender);
 
         // If warp does not exist.
         if (warp == null) {
@@ -35,13 +35,15 @@ public class InfoWarp implements TabExecutor {
         if (warp.authorName != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.authorName);
         else if (warp.author != null) sender.sendRichMessage("<gray>- Author: </gray>" + warp.author);
 
+        sender.sendRichMessage("<gray>- Private: </gray>" + warp.isPrivate);
+
         return true;
     }
 
     @Override
     public List<String> onTabComplete(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
         if (args.length == 1) {
-            return dataHandler.getWarps();
+            return dataHandler.getWarps(sender);
         }
 
         return new ArrayList<>();
