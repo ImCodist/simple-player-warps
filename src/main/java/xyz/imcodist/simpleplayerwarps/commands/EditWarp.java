@@ -57,6 +57,7 @@ public class EditWarp implements TabExecutor {
             String property = args[1];
             List<String> values = Arrays.asList(args).subList(2, args.length);
 
+            // Setup the old version of the warp for deleting the old file.
             WarpData oldWarp = new WarpData();
             oldWarp.name = warp.name;
             oldWarp.author = warp.author;
@@ -123,9 +124,11 @@ public class EditWarp implements TabExecutor {
                 String valueDisplay = getPropertyDisplayValue(warp, property);
                 sender.sendRichMessage("<gray>Set</gray> " + property + " <gray>of</gray> " + oldWarp.name + " <gray>to</gray> " + valueDisplay + "<gray>.</gray>");
 
+                // Remove the old warp file
                 WarpData[] remove = {oldWarp};
                 dataHandler.updateFiles(null, remove);
 
+                // Create the new one
                 WarpData[] add = {warp};
                 dataHandler.updateFiles(add, null);
             }
