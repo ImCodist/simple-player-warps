@@ -34,6 +34,7 @@ public class ListWarps implements TabExecutor {
             return true;
         }
 
+        // TODO: This doesnt work.
         Collections.sort(warps);
 
         // Display a list of warps.

@@ -16,6 +16,7 @@ I plan to add a plethora of customization options so you can mold to plugin exac
 - `/warps [player]` - Returns a list of warps the player can teleport to.
 - `/warpset <name>` - Creates a warp at a position for players to teleport to.
 - `/warpdel <name>` - Deletes an existing warp.
+- `/warpedit <name> [property] [value]` - Edit a property of an existing warp.
 - `/warpinfo <name>` - Returns basic information on a warp. (i.e location, creator, world)
 - `/warpreload` - Reloads configuration and warps.
 
@@ -24,9 +25,14 @@ I plan to add a plethora of customization options so you can mold to plugin exac
 - `simpleplayerwarps.warps` - Allows a user to view every created warp. (default: true)
 - `simpleplayerwarps.warpset` - Allows a user to create a warp. (default: true)
 - `simpleplayerwarps.warpdel` - Allows a user to delete warps they own. (default: true)
+- `simpleplayerwarps.warpedit` - Allows a user to edit warps they own. (default: true)
 - `simpleplayerwarps.warpinfo` - Allows a user to view information on a warp. (default: true)
 - `simpleplayerwarps.warpreload` - Reloads the plugins configuration and warps folder. (default: op)
 - `simpleplayerwarps.warpset.infinite` - Allows a user to create infinite warps. (default: op)
 - `simpleplayerwarps.warpdel.others` - Allows a user to delete others warps. (default: op)
+- `simpleplayerwarps.warpedit.others` - Allows a user to edit others warps. (default: op)
+- `simpleplayerwarps.warpedit.advanced` - Allows a user to edit advanced values of a warp like position and author. (default: op)
+- `simpleplayerwarps.warps.private` - Allows a user to view private warps. (default: op)
+- `simpleplayerwarps.privatewarps` - Allows a user to create private warps. (default: true)
 
 ### NOTE: SimplePlayerWarps is ONLY for Paper servers (and loaders that use it as a base) as of right now. I will consider downgrading to Spigot if the demand is high enough.
