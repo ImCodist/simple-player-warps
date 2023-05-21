@@ -18,10 +18,14 @@ public class InfoWarp implements TabExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, String[] args) {
-        WarpData warp = null;
-        if (args.length >= 1) warp = dataHandler.getWarp(args[0], sender);
+        // Check if a warp name has been entered.
+        if (args.length < 1) {
+            sender.sendRichMessage("<gray>No</gray> warp name <gray>has been entered.</gray>");
+            return true;
+        }
 
-        // If warp does not exist.
+        // Get the warp and return if it doesn't exist.
+        WarpData warp = dataHandler.getWarp(args[0], sender);
         if (warp == null) {
             sender.sendRichMessage("<gray>No</gray> warp <gray>named</gray> " + args[0] + " <gray>exists.</gray>");
             return true;
