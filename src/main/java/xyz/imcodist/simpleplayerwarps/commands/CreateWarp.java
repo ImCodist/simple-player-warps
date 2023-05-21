@@ -102,6 +102,8 @@ public class CreateWarp implements TabExecutor {
         WarpData oldWarp = dataHandler.getWarp(warp.name, null);
         if (oldWarp != null) {
             if (dataHandler.canEditWarp(sender, oldWarp, "simpleplayerwarps.warpdel.others")) {
+                warp.isPrivate = oldWarp.isPrivate;
+
                 dataHandler.removeWarp(oldWarp);
                 replaced = true;
             } else {
