@@ -156,7 +156,7 @@ public class EditWarp implements TabExecutor {
             // Only warp given
             ArrayList<String> propertyList = getPropertyList(sender);
             if (propertyList.size() > 0) {
-                sender.sendRichMessage("Editable propertys <gray>of warp</gray> " + warp.name + "<gray>:</gray>");
+                sender.sendRichMessage("Editable properties <gray>of warp</gray> " + warp.name + "<gray>:</gray>");
 
                 for (String property : propertyList) {
                     String valueDisplay = getPropertyDisplayValue(warp, property);
@@ -168,7 +168,7 @@ public class EditWarp implements TabExecutor {
                     sender.sendRichMessage(String.format("<hover:show_text:'%s'><click:suggest_command:%s ><gray>- %s%s:</gray> %s</click></hover>", commandInsert, commandInsert, property, suffix, valueDisplay));
                 }
             } else {
-                sender.sendRichMessage("<gray>There are</gray> no editable propertys <gray>of warp</gray> " + warp.name + "<gray>.</gray>");
+                sender.sendRichMessage("<gray>There are</gray> no editable properties <gray>of warp</gray> " + warp.name + "<gray>.</gray>");
             }
         }
 
